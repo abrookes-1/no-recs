@@ -2,15 +2,13 @@
 //     createRelatedBlocker,
 //     removeBrowseBlocker,
 //     removeRelatedBlocker} from './styles';
-var test;
+window.onInstall = onInstall;
+
+// onStart();
 
 function onStart () {
-    onInstall(); // TODO: run only at install
-
     usePreferences();
 }
-
-onStart();
 
 function onInstall () {
     var defaultPrefs = {
@@ -28,8 +26,11 @@ function setPreferences (val) {
 function usePreferences () {
     chrome.storage.local.get('norec_prefs', (val) => { // TODO: change local to sync
         var prefs = val.norec_prefs;
+        
+        removeBrowseBlocker(); // TODO: only remove if needed
+        removeRelatedBlocker();
 
-        if (prefs.browse_block) {
+        if (prefs.browse_block) { // TODO: only create if not already there
             createBrowseBlocker();
         }
         if (prefs.related_block) {
