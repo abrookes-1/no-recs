@@ -2,34 +2,40 @@
 //     createRelatedBlocker,
 //     removeBrowseBlocker,
 //     removeRelatedBlocker} from './styles';
+var test;
 
 function onStart () {
     onInstall(); // TODO: run only at install
 
-    createBrowseBlocker();
-    createRelatedBlocker();
+    usePreferences();
 }
 
 onStart();
 
 function onInstall () {
     var defaultPrefs = {
-        "browse-block": true,
-        "related-block": true
+        "browse_block": true,
+        "related_block": true
     }
+
     setPreferences(defaultPrefs);
 }
 
-function setPreferences (text) {
-    chrome.storage.sync.set({ norec_prefs: text });
+function setPreferences (val) {
+    chrome.storage.local.set({norec_prefs: val}); // TODO : change local to sync
 }
 
-function getPreferences () {
-    var prefs;
-    chrome.storage.sync.get('norec_prefs', function(data) {
-        prefs = data.norec_prefs;
+function usePreferences () {
+    chrome.storage.local.get('norec_prefs', (val) => { // TODO: change local to sync
+        var prefs = val.norec_prefs;
+
+        if (prefs.browse_block) {
+            createBrowseBlocker();
+        }
+        if (prefs.related_block) {
+            createRelatedBlocker();
+        }
     });
-    return prefs;
 }
 
 var relatedID = 'no-recs-related-style';
