@@ -1,49 +1,15 @@
-// import {createBrowseBlocker,
-//     createRelatedBlocker,
-//     removeBrowseBlocker,
-//     removeRelatedBlocker} from './styles';
-
-function onStart () {
-    onInstall(); // TODO: run only at install
-
-    createBrowseBlocker();
-    createRelatedBlocker();
-}
-
-onStart();
-
-function onInstall () {
-    var defaultPrefs = {
-        "browse-block": true,
-        "related-block": true
-    }
-    setPreferences(defaultPrefs);
-}
-
-function setPreferences (text) {
-    chrome.storage.sync.set({ norec_prefs: text });
-}
-
-function getPreferences () {
-    var prefs;
-    chrome.storage.sync.get('norec_prefs', function(data) {
-        prefs = data.norec_prefs;
-    });
-    return prefs;
-}
-
 var relatedID = 'no-recs-related-style';
 var browseID = 'no-recs-browse-style';
 
-function removeRelatedBlocker () {
+export function removeRelatedBlocker(){
     document.getElementById(relatedID).remove();
 }
 
-function removeBrowseBlocker () {
+export function removeBrowseBlocker(){
     document.getElementById(browseID).remove();
 }
 
-function createRelatedBlocker () {
+export function createRelatedBlocker(){
     var related = document.createElement('style');
     related.id = relatedID;
 
@@ -56,7 +22,7 @@ function createRelatedBlocker () {
     createElementHead(related);
 }
 
-function createBrowseBlocker () {
+export function createBrowseBlocker(){
     var browse = document.createElement('style');
     browse.id = browseID;
 
@@ -86,3 +52,4 @@ function createElementHead(element){
         observer.observe(root, {childList: true});
     }
 }
+// document.addEventListener("loadstart", onReady);
