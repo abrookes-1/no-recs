@@ -1,6 +1,7 @@
 var relatedID = 'no-recs-related-style';
 var browseID = 'no-recs-browse-style';
 
+
 export function removeRelatedBlocker(){
     document.getElementById(relatedID).remove();
 }
