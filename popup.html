@@ -7,20 +7,17 @@
     <script src="popup.js" type="module"></script>
 </head>
 <body>
-    <div>
-        <h2>Home Page</h2>
-        <label class="switch">
-            <h2 id="test-browse"></h2>
-            <input id="browse-switch" type="checkbox" checked>
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div>
-        <h2>Related</h2>
-        <label class="switch">
-            <input id="related-switch" type="checkbox" checked>
-            <span class="slider round"></span>
-        </label>
-    </div>
+<div id="main">
+    <h2 class="cols-left" >Hide Home Page Browsing</h2>
+    <label class="switch cols-right">
+        <input id="browse-switch" type="checkbox" checked>
+        <span class="slider round"></span>
+    </label>
+    <h2 class="cols-left">Hide Related Suggestions</h2>
+    <label class="switch cols-right">
+        <input id="related-switch" type="checkbox" checked>
+        <span class="slider round"></span>
+    </label>
+</div>
 </body>
 </html>

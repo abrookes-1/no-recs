@@ -53,4 +53,3 @@ function createElementHead(element){
         observer.observe(root, {childList: true});
     }
 }
-// document.addEventListener("loadstart", onReady);

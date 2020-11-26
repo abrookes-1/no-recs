@@ -1,3 +1,31 @@
+body {
+  background-color: #1b222e;
+}
+
+#main {
+  float: center;
+  width: 250pt;
+  height: 80pt;
+  padding: 10pt;
+}
+
+.cols-left {
+  float: left;
+  text-align: right;
+  width: 74%;
+}
+
+.cols-right {
+  float: right;
+  text-align: left;
+  width: 25%;
+}
+
+h2 {
+  color: white;
+  padding: 0px;
+}
+
 .switch {
 position: relative;
 display: inline-block;
