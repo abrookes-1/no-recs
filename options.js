@@ -4,36 +4,45 @@
 //     removeRelatedBlocker} from './styles';
 window.onInstall = onInstall;
 
-// onStart();
+onStart();
 
 function onStart () {
     usePreferences();
 }
 
 function onInstall () {
-    var defaultPrefs = {
-        "browse_block": true,
-        "related_block": true
+    var default1 = {
+        norec_browse_block: true
+    }
+    var default2 = {
+        norec_related_block: true
     }
 
-    setPreferences(defaultPrefs);
+    setPreferences(default1);
+    setPreferences(default2);
 }
 
-function setPreferences (val) {
-    chrome.storage.local.set({norec_prefs: val}); // TODO : change local to sync
+function setPreferences (obj) {
+    chrome.storage.local.set(obj); // TODO : change local to sync
 }
 
 function usePreferences () {
-    chrome.storage.local.get('norec_prefs', (val) => { // TODO: change local to sync
-        var prefs = val.norec_prefs;
+    chrome.storage.local.get(['norec_browse_block', 'norec_related_block'], (stored) => { // TODO: change local to sync
         
+        console.log(stored);
+
         removeBrowseBlocker(); // TODO: only remove if needed
         removeRelatedBlocker();
 
-        if (prefs.browse_block) { // TODO: only create if not already there
+        console.log(stored.norec_browse_block);
+        console.log(stored.norec_related_block);
+
+        if (stored.norec_browse_block) { // TODO: only create if not already there
+            console.log('one');
             createBrowseBlocker();
         }
-        if (prefs.related_block) {
+        if (stored.norec_related_block) {
+            console.log('two');
             createRelatedBlocker();
         }
     });
@@ -43,11 +52,15 @@ var relatedID = 'no-recs-related-style';
 var browseID = 'no-recs-browse-style';
 
 function removeRelatedBlocker () {
-    document.getElementById(relatedID).remove();
+    if (document.getElementById(relatedID)){
+        document.getElementById(relatedID).remove();
+    }
 }
 
 function removeBrowseBlocker () {
-    document.getElementById(browseID).remove();
+    if (document.getElementById(browseID)){
+        document.getElementById(browseID).remove();
+    }
 }
 
 function createRelatedBlocker () {
