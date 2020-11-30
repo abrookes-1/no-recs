@@ -2,15 +2,14 @@
 //     createRelatedBlocker,
 //     removeBrowseBlocker,
 //     removeRelatedBlocker} from './styles';
-window.onInstall = onInstall;
-
 onStart();
 
 function onStart () {
     usePreferences();
+    // defaults();
 }
 
-function onInstall () {
+function defaults () {
     var default1 = {
         norec_browse_block: true
     }
